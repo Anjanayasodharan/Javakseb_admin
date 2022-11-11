@@ -239,7 +239,37 @@ public class Admin {
                     }
                 case 7:
                     System.out.println("view bill");
-                    break;
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb","root","");
+                        String sql = "SELECT  c.name,c.address,b.`month`, b.`year`, b.`bill`, b.`paid status`, b.`billdate`, b.`totalunit`, b.`duedate` FROM `bill` b JOIN consumer c ON b.userid=c.id";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while(rs.next()) {
+                            name = rs.getString("c.name");
+                            address = rs.getString("c.address");
+                            int month1 = rs.getInt("b.month");
+                            int year1 = rs.getInt("b.year");
+                            int bill = rs.getInt("b.bill");
+                            String sta = rs.getString("b.paid status");
+                            String date1 = rs.getString("b.billdate");
+                            int total = rs.getInt("b.totalunit");
+                            String date2 = rs.getString("b.duedate");
+
+                            System.out.println("name =" + name);
+                            System.out.println("address =" + address);
+                            System.out.println("month =" + month1);
+                            System.out.println("year = " + year1);
+                            System.out.println("total bill = " + bill);
+                            System.out.println("status=" + sta);
+                            System.out.println("bill date=" + date1);
+                            System.out.println("total unit =" + total);
+                            System.out.println("due date=" + date2);
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                 case 8:
                     System.out.println("Top 2 high bill");
                     break;
