@@ -64,7 +64,7 @@ public class Admin {
                     int choice1 = sc.nextInt();
                     switch (choice1) {
                         case 1:
-                            System.out.println("enter the name:-");
+                            System.out.println("enter the consumer name:-");
                             name = sc.next();
                             try {
                                 Class.forName("com.mysql.jdbc.Driver");
