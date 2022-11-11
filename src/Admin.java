@@ -158,7 +158,29 @@ public class Admin {
                     }
                     break;
                 case 4:
-                    System.out.println("update consumer selected");
+                    System.out.println("Update customer");
+                    System.out.println("Add customer details...");
+                    System.out.println("Enter the customer code");
+                    code=sc.nextInt();
+                    System.out.println("Enter the  name to be updated:--");
+                    name=sc.next();
+                    System.out.println("Enter the Address to be updated:--");
+                    address=sc.next();
+                    System.out.println("Enter the phone to be updated:--");
+                    phone=sc.nextInt();
+                    System.out.println("Enter the email to be updated:--");
+                    email=sc.next();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb","root","");
+                        String sql="UPDATE `consumer` SET `name`='"+name+"',`address`='"+address+"',`phno`='"+String.valueOf(phone)+"',`email`='"+email+"' WHERE `code`="+String.valueOf(code);
+                        Statement stmt=con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("Data updated  successfully.....");
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
                 case 5:
                     System.out.println("view all consumer selected");
