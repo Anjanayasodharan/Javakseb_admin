@@ -1,5 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.sql.*;
 
@@ -64,99 +67,76 @@ public class Admin {
                     System.out.println("2.search using phone number");
                     System.out.println("3.search using code");
                     int choice1 = sc.nextInt();
-                    switch (choice1)
-                    {
+                    switch (choice1) {
                         case 1:
-                            System.out.println("enter the name:-");
+                            System.out.println("enter the consumer name:-");
                             name = sc.next();
-                            try{
+                            try {
                                 Class.forName("com.mysql.jdbc.Driver");
                                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
-                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `name`='"+name+"'";
-                                Statement stmt=con.createStatement();
-                                ResultSet rs=stmt.executeQuery(sql);
-                                while(rs.next()){
+                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `name`='" + name + "'";
+                                Statement stmt = con.createStatement();
+                                ResultSet rs = stmt.executeQuery(sql);
+                                while (rs.next()) {
                                     name = rs.getString("name");
                                     address = rs.getString("address");
                                     phone = rs.getInt("phno");
                                     email = rs.getString("email");
-                                    System.out.println("name = "+name);
-                                    System.out.println("address = "+address);
-                                    System.out.println("phno = "+phone);
-                                    System.out.println("Email id = "+email+'\n');
+                                    System.out.println("name = " + name);
+                                    System.out.println("address = " + address);
+                                    System.out.println("phone number = " + phone);
+                                    System.out.println("Email id = " + email + '\n');
                                 }
-                            }
-                            catch (Exception e){
+                            } catch (Exception e) {
                                 System.out.println(e);
                             }
                             break;
                         case 2:
                             System.out.println("enter phone number for search :-");
                             phone = sc.nextInt();
-                            try{
+                            try {
                                 Class.forName("com.mysql.jdbc.Driver");
                                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
-                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `phno`='"+phone+"'";
-                                Statement stmt=con.createStatement();
-                                ResultSet rs=stmt.executeQuery(sql);
-                                while(rs.next()){
+                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `phno`='" + phone + "'";
+                                Statement stmt = con.createStatement();
+                                ResultSet rs = stmt.executeQuery(sql);
+                                while (rs.next()) {
                                     name = rs.getString("name");
                                     address = rs.getString("address");
                                     phone = rs.getInt("phno");
                                     email = rs.getString("email");
-                                    System.out.println("name = "+name);
-                                    System.out.println("address = "+address);
-                                    System.out.println("phno = "+phone);
-                                    System.out.println("Email id = "+email+'\n');
+                                    System.out.println("name = " + name);
+                                    System.out.println("address = " + address);
+                                    System.out.println("phone number = " + phone);
+                                    System.out.println("Email id = " + email + '\n');
                                 }
-                            }
-                            catch (Exception e){
+                            } catch (Exception e) {
                                 System.out.println(e);
                             }
                             break;
                         case 3:
-                            System.out.println("Enter customer code for search");
+                            System.out.println("Enter consumer code for search");
                             code = sc.nextInt();
-                            try{
+                            try {
                                 Class.forName("com.mysql.jdbc.Driver");
                                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
-                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `code`='"+code+"'";
-                                Statement stmt=con.createStatement();
-                                ResultSet rs=stmt.executeQuery(sql);
-                                while(rs.next()){
+                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `code`='" + code + "'";
+                                Statement stmt = con.createStatement();
+                                ResultSet rs = stmt.executeQuery(sql);
+                                while (rs.next()) {
                                     name = rs.getString("name");
                                     address = rs.getString("address");
                                     phone = rs.getInt("phno");
                                     email = rs.getString("email");
-                                    System.out.println("name = "+name);
-                                    System.out.println("address = "+address);
-                                    System.out.println("phno = "+phone);
-                                    System.out.println("Email id = "+email+'\n');
+                                    System.out.println("name = " + name);
+                                    System.out.println("address = " + address);
+                                    System.out.println("phone number = " + phone);
+                                    System.out.println("Email id = " + email + '\n');
                                 }
-                            }
-                            catch (Exception e){
+                            } catch (Exception e) {
                                 System.out.println(e);
                             }
-                            break;
                     }
-
-                    break;
-                case 3:
-                    System.out.println("Delete customer");
-                    System.out.println("enter the code ");
-                    code=sc.nextInt();
-                    try{
-                        Class.forName("com.mysql.jdbc.Driver");
-                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb","root","");
-                        String sql="DELETE FROM `consumer` WHERE `code`="+String.valueOf(code);
-                        Statement stmt=con.createStatement();
-                        stmt.executeUpdate(sql);
-                        System.out.println("deleted successfully.....");
-                    }
-                    catch (Exception e){
-                        System.out.println((e));
-                    }
-                    break;
                 case 4:
                     System.out.println("Update customer");
                     System.out.println("Add customer details...");
@@ -208,9 +188,55 @@ public class Admin {
                     }
                     break;
 
+
+
                 case 6:
-                    System.out.println("generate bill");
-                    break;
+                    Date dt=new Date();
+                    Calendar cal= Calendar.getInstance();
+                    cal.setTime(dt);
+                    System.out.println(dt);
+                    System.out.println(cal);
+                    int month=cal.get(Calendar.DAY_OF_MONTH);
+                    int year=cal.get(Calendar.YEAR);
+                    int status = 1;
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb","root","");
+                        String sql = "DELETE FROM `bill` WHERE `month`= '" + month + "'AND `year`= '" + year + "'";
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(sql);
+                        String sql1 = "SELECT `id` FROM `consumer` ";
+                        //String sql = "SELECT `id` FROM `customer`;
+                        Statement stmt1 = con.createStatement();
+                        ResultSet rs = stmt1.executeQuery(sql1);
+                        while(rs.next())
+                        {
+                            int id = rs.getInt("id");
+                            String sql2 = "SELECT SUM(`unit`) FROM `usages`  WHERE `userid`='" + id + "'  AND MONTH(`datetime`)='" + month + "' AND YEAR(`datetime`)='" + year + "'";
+                            Statement stmt2 = con.createStatement();
+                            ResultSet rs2 = stmt2.executeQuery(sql2);
+                            while (rs2.next())
+                            {
+                                int add = rs2.getInt("SUM(`unit`)");
+                                //int status = 1;
+                                int totalBill = add * 5;
+                                String sql3 = "INSERT INTO `bill`(`userid`, `month`, `year`, `bill`, `paid status`, `totalunit`,`billdate`, `duedate`) VALUES(?,?,?,?,?,?,now(),now()+interval 14 day)";
+                                PreparedStatement stmt3 = con.prepareStatement(sql3);
+                                //ResultSet rs3 = stmt3.executeQuery(sql3);
+                                stmt3.setInt(1,id);
+                                stmt3.setInt(2,month);
+                                stmt3.setInt(3,year);
+                                stmt3.setInt(4,totalBill);
+                                stmt3.setInt(5,status);
+                                stmt3.setInt(6,add);
+                                stmt3.executeUpdate();
+                                System.out.println("value inserted successfully.........!");
+                            }
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                 case 7:
                     System.out.println("view bill");
                     break;
