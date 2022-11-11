@@ -24,11 +24,40 @@ public class Admin {
             System.out.println("7 view bill");
             System.out.println("8 Top 2 high bill");
             System.out.println("9 exit");
-            Scanner scanner = new Scanner(System.in);
-            choice = scanner.nextInt();
+            Scanner sc = new Scanner(System.in);
+
+            choice = sc.nextInt();
+            int code,phone;
+            String name,address,email;
             switch (choice) {
                 case 1:
-                    System.out.println("insert consumer selected");
+                    System.out.println("Add customer details...");
+                    System.out.println("Enter the customer code");
+                    code=sc.nextInt();
+                    System.out.println("Enter the  name:--");
+                    name=sc.next();
+                    System.out.println("Enter the Address:--");
+                    address=sc.next();
+                    System.out.println("Enter the phone:--");
+                    phone=sc.nextInt();
+                    System.out.println("Enter the email:--");
+                    email=sc.next();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb","root","");
+                        String sql="INSERT INTO `consumer`(`code`, `name`, `address`, `phno`, `email`) VALUES (?,?,?,?,?)";
+                        PreparedStatement stmt=con.prepareStatement((sql));
+                        stmt.setInt(1,code);
+                        stmt.setString(2,name);
+                        stmt.setString(3,address);
+                        stmt.setInt(4,phone);
+                        stmt.setString(5,email);
+                        stmt.executeUpdate();
+                        System.out.println("value inserted successfully.........!");
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
                 case 2:
                     System.out.println("search consumer selected");
