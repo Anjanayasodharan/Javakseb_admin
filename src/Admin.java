@@ -60,10 +60,102 @@ public class Admin {
                     }
                     break;
                 case 2:
-                    System.out.println("search consumer selected");
+                    System.out.println("1.search using name");
+                    System.out.println("2.search using phone number");
+                    System.out.println("3.search using code");
+                    int choice1 = sc.nextInt();
+                    switch (choice1)
+                    {
+                        case 1:
+                            System.out.println("enter the name:-");
+                            name = sc.next();
+                            try{
+                                Class.forName("com.mysql.jdbc.Driver");
+                                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
+                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `name`='"+name+"'";
+                                Statement stmt=con.createStatement();
+                                ResultSet rs=stmt.executeQuery(sql);
+                                while(rs.next()){
+                                    name = rs.getString("name");
+                                    address = rs.getString("address");
+                                    phone = rs.getInt("phno");
+                                    email = rs.getString("email");
+                                    System.out.println("name = "+name);
+                                    System.out.println("address = "+address);
+                                    System.out.println("phno = "+phone);
+                                    System.out.println("Email id = "+email+'\n');
+                                }
+                            }
+                            catch (Exception e){
+                                System.out.println(e);
+                            }
+                            break;
+                        case 2:
+                            System.out.println("enter phone number for search :-");
+                            phone = sc.nextInt();
+                            try{
+                                Class.forName("com.mysql.jdbc.Driver");
+                                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
+                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `phno`='"+phone+"'";
+                                Statement stmt=con.createStatement();
+                                ResultSet rs=stmt.executeQuery(sql);
+                                while(rs.next()){
+                                    name = rs.getString("name");
+                                    address = rs.getString("address");
+                                    phone = rs.getInt("phno");
+                                    email = rs.getString("email");
+                                    System.out.println("name = "+name);
+                                    System.out.println("address = "+address);
+                                    System.out.println("phno = "+phone);
+                                    System.out.println("Email id = "+email+'\n');
+                                }
+                            }
+                            catch (Exception e){
+                                System.out.println(e);
+                            }
+                            break;
+                        case 3:
+                            System.out.println("Enter customer code for search");
+                            code = sc.nextInt();
+                            try{
+                                Class.forName("com.mysql.jdbc.Driver");
+                                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb", "root", "");
+                                String sql = "SELECT  `name`, `address`, `phno`, `email` FROM `consumer` WHERE `code`='"+code+"'";
+                                Statement stmt=con.createStatement();
+                                ResultSet rs=stmt.executeQuery(sql);
+                                while(rs.next()){
+                                    name = rs.getString("name");
+                                    address = rs.getString("address");
+                                    phone = rs.getInt("phno");
+                                    email = rs.getString("email");
+                                    System.out.println("name = "+name);
+                                    System.out.println("address = "+address);
+                                    System.out.println("phno = "+phone);
+                                    System.out.println("Email id = "+email+'\n');
+                                }
+                            }
+                            catch (Exception e){
+                                System.out.println(e);
+                            }
+                            break;
+                    }
+
                     break;
                 case 3:
-                    System.out.println("delete consumer selected");
+                    System.out.println("Delete customer");
+                    System.out.println("enter the code ");
+                    code=sc.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb","root","");
+                        String sql="DELETE FROM `consumer` WHERE `code`="+String.valueOf(code);
+                        Statement stmt=con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("deleted successfully.....");
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
                 case 4:
                     System.out.println("update consumer selected");
