@@ -183,8 +183,31 @@ public class Admin {
                     }
                     break;
                 case 5:
-                    System.out.println("view all consumer selected");
+                    System.out.println("View all consumer");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/admindb","root","");
+                        String sql = "SELECT `code`, `name`, `address`, `phno`, `email` FROM `consumer`";
+                        Statement stmt=con.createStatement();
+                        ResultSet rs=stmt.executeQuery(sql);
+                        while(rs.next()){
+                            code = rs.getInt("code");
+                            name = rs.getString("name");
+                            address = rs.getString("address");
+                            phone = rs.getInt("phno");
+                            email = rs.getString("email");
+                            System.out.println("code = "+code);
+                            System.out.println("name = "+name);
+                            System.out.println("address = "+address);
+                            System.out.println("phno = "+phone);
+                            System.out.println("Email id = "+email+'\n');
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
+
                 case 6:
                     System.out.println("generate bill");
                     break;
